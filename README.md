@@ -1,7 +1,7 @@
 # Hue Motion Sensor — relevé de température
 
 Petite application web qui enregistre la température de tes **Philips Hue Motion Sensor**
-toutes les 5 minutes et l'affiche :
+toutes les 30 minutes et l'affiche :
 
 - **par journée** : courbe de la température + min / moyenne / max du jour ;
 - **par heure** : tableau min / moyenne / max pour chaque heure.
@@ -10,7 +10,7 @@ Tout tourne dans le cloud, sans appareil allumé chez toi :
 
 ```
 Capteur → Pont Hue → Cloud Hue (api.meethue.com)
-                           ↑ lecture toutes les 5 min
+                           ↑ lecture toutes les 30 min
 cron-job.org → Vercel (/api/cron) → Neon (Postgres) ← Vercel (pages web)
 ```
 
@@ -65,7 +65,7 @@ L'offre gratuite de Vercel ne permet qu'une tâche planifiée par jour, on utili
 
 1. **Create cronjob**
 2. **URL** : `https://mon-hue.vercel.app/api/cron`
-3. **Schedule** : toutes les 5 minutes
+3. **Schedule** : toutes les 30 minutes
 4. **Advanced → Headers** : `Authorization` = `Bearer <ta valeur de CRON_SECRET>`
 5. Active les notifications d'échec pour être prévenu si la collecte s'arrête
    (ex. jeton Hue expiré → refaire l'étape 5).
@@ -89,7 +89,7 @@ npm run dev
   capteurs via `https://api.meethue.com/route/clip/v2/...` et enregistre une mesure par capteur.
 - Le jeton OAuth Hue est rafraîchi automatiquement avant expiration (et en cas d'erreur 401).
 - Les vues jour/heure sont calculées dans le fuseau `APP_TIMEZONE` (changements d'heure gérés).
-- Une mesure toutes les 5 min ≈ 105 000 lignes/an par capteur : largement dans l'offre gratuite Neon.
+- Une mesure toutes les 30 min (2 par heure) ≈ 17 500 lignes/an par capteur : largement dans l'offre gratuite Neon.
 
 ## Limites connues
 - Si internet, le cloud Hue, Vercel ou cron-job.org est indisponible, des mesures manquent

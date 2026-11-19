@@ -69,7 +69,7 @@ export default async function Setup({
           <p className="muted">Aucune mesure reçue pour l&apos;instant.</p>
         )}
         <p className="muted">
-          Sur cron-job.org, crée une tâche toutes les 5 minutes vers <code>/api/cron</code> avec
+          Sur cron-job.org, crée une tâche toutes les 30 minutes vers <code>/api/cron</code> avec
           l&apos;en-tête <code>Authorization: Bearer &lt;CRON_SECRET&gt;</code>. Voir le README.
         </p>
       </div>

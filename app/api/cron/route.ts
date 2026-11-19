@@ -3,7 +3,7 @@ import { collect } from "@/lib/collect";
 export const dynamic = "force-dynamic";
 
 /**
- * Appelé toutes les 5 minutes par cron-job.org avec l'en-tête
+ * Appelé toutes les 30 minutes par cron-job.org avec l'en-tête
  * "Authorization: Bearer <CRON_SECRET>".
  */
 export async function GET(request: Request) {
